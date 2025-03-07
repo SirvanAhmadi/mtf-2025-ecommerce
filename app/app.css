@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@font-face {
+  font-family: 'iranian-sans';
+  src: url("/IranianSans.ttf");
+}
+
+:root{
+  font-family:'iranian-sans', sans-serif;
+}
+
+
+@theme {
+  --color-platinum: #D8E2DC;
+  --color-rose: #FAE0E4;
+  --color-light-pink: #FFCAD4;
+  --color-dark-pink: #F4ACB7;
+  --color-dark-soil: #9D8189;
+  --color-ash-gray: #B0C4B1;
+  --color-outer-space: #4A5759;
+}
+
