@@ -17,7 +17,7 @@ const ProductsPage = ({loaderData}:Route.ComponentProps) => {
     const {data} = loaderData as unknown as  ApiResponse<Product>;
   return (
     <div>
-        <section className="grid grid-cols-4">
+        <section className="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3">
             {data.map(pro => (
                 <ProductCard product={pro} key={pro.id} />
             ))}

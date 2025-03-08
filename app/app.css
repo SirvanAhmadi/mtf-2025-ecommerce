@@ -24,3 +24,8 @@
   --color-outer-space: #4A5759;
 }
 
+
+.subCategorySibling:hover > ul{
+  display: flex !important;
+}
+

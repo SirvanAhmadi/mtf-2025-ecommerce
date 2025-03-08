@@ -6,22 +6,17 @@ import type { SubCategory } from '~/types/SubCategory'
 const SubNavbar = () => {
 
   const {cateData} = useLoaderData<{cateData:Category[]}>();
-  const [visible,setVisible] = useState(false)
 
   return (
     <section>
         <nav className="bg-ash-gray">
             <ul className="menu menu-horizontal">
                 {cateData.map(cate => (
-                    <li key={cate.id} className="w-28 relative" onMouseEnter={() => {
-                        setVisible(true);
-                    }} onMouseLeave={() => {
-                        setVisible(false)
-                    }}>
-                        <Link className="w-full justify-center" to={"/"}>
+                    <li key={cate.id} className="min-w-24 max-w-32 relative subCategorySibling" >
+                        <Link className={"w-full justify-center "} to={"/"}>
                             {cate.name}
                         </Link>
-                        {visible && <SubCategoryMenu subCategory={cate.sub_categories} />}
+                        <SubCategoryMenu subCategory={cate.sub_categories} />
                     </li>
                 ))}
             </ul>
@@ -33,7 +28,7 @@ const SubNavbar = () => {
 const SubCategoryMenu = ({subCategory}:{subCategory:SubCategory[]}) => {
 
     return (
-        <ul className="menu bg-base-200 rounded-box w-56 absolute top-[100%] z-50">
+        <ul className="hidden menu bg-base-200 rounded-box w-56 absolute top-[100%] z-50">
             {subCategory.map(sc => (
                 <li key={sc.id}>
                     <Link to={`products/${sc.slug}`}>

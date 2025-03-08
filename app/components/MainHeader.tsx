@@ -8,11 +8,11 @@ const MainHeader = () => {
     <header>
             <section className="flex py-5 bg-rose">
                 <div className="w-1/4">
-                    <h2 className="text-2xl flex items-center justify-center text-outer-space font-bold" style={{
+                    <Link to={"/"} className="text-2xl flex items-center justify-center text-outer-space font-bold" style={{
                         letterSpacing:"5px"
                     }}>
                         Rosa
-                    </h2>
+                    </Link>
                 </div>
                 <div className="w-2/4">
                     <Form className="w-full">
