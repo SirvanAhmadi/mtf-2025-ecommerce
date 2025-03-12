@@ -1,33 +1,29 @@
-import {Link} from "react-router";
-import {FiEdit2} from "react-icons/fi";
-import {BASE_URL_API, fetchWithRetry} from "~/apiClient";
-import type {Category} from "~/types/Category";
-import type {Route} from "../../../.react-router/types/app/routes/admin-routes/+types/admin-categories";
+import { FiEdit2 } from 'react-icons/fi';
+import { Link } from 'react-router';
+import { fetchWithRetry, BASE_URL_API } from '~/apiClient';
+import type { SubCategory } from '~/types/SubCategory';
+import type { Route } from './+types/admin-subCategories';
 
-
-
-export async function loader(){
-    const cateRes = await fetchWithRetry(BASE_URL_API + "/categories")
-
-    const cateData:Category[] = await cateRes.json();
-    return {
-        data: cateData,
-    };
+export async function loader() {
+    const subCateRes = await fetchWithRetry(BASE_URL_API + "/sub-categories")
+    
+        const subCateData:SubCategory[] = await subCateRes.json();
+        return {
+            data: subCateData,
+        };
 }
 
-const AdminCategories = ({loaderData}:Route.ComponentProps) => {
-
-    const { data:categories } = loaderData;
-
+const AdminSubCategory = ({loaderData}:Route.ComponentProps) => {
+    const {data: subCategories} = loaderData;
     return (
         <div className={"h-full"}>
             {/*  Admin Product Table   */}
             <div className={"p-10 flex justify-between"}>
                 <h2 className={"text-2xl"}>
-                    دسته بندی ها
+                   زیر دسته بندی
                 </h2>
-                <Link to={"/admin/add-category"} className={"btn bg-outer-space text-white"}>
-                    + اضافه کردن دسته بندی
+                <Link to={"/admin/add-subcategory"} className={"btn bg-outer-space text-white"}>
+                    + اضافه کردن زیر دسته بندی
                 </Link>
             </div>
             <div className={"flex justify-center items-center"}>
@@ -36,31 +32,31 @@ const AdminCategories = ({loaderData}:Route.ComponentProps) => {
                         {/* head */}
                         <thead>
                         <tr>
-                            <th>نام دسته بندی</th>
-                            <th className={"hidden md:table-cell"}>تعداد زیر دسته بندی</th>
+                            <th>نام زیر دسته بندی</th>
+                            <th className={"hidden md:table-cell"}>نام دسته بندی</th>
                             <th>عملیات ها</th>
                         </tr>
                         </thead>
                         <tbody>
                         {/* row 1 */}
-                        {categories &&
-                            categories.map((category) => {
+                        {subCategories &&
+                            subCategories.map((subCategory) => {
                                 return (
-                                    <tr key={category.id}>
+                                    <tr key={subCategory.id}>
                                         <td>
-                                            <p className={"font-medium"}>{category.name}</p>
+                                            <p className={"font-medium"}>{subCategory.name}</p>
                                             <p className={"text-green-600 md:hidden badge my-2"}>
-                                                {category.sub_categories.length || "دسته بندی ندارد"}
+                                                {subCategory.parent_category.name}
                                             </p>
                                         </td>
                                         <td className={"hidden text-[#185E57] md:table-cell"}>
-                                            {category.sub_categories.length || "دسته بندی ندارد"}
+                                            {subCategory.parent_category.name}
                                         </td>
                                         <th>
                                             <div
                                                 className={"flex items-center gap-3"}
                                             >
-                                                <Link to={`/admin/products/${category.slug}`}>
+                                                <Link to={`/admin/products/${subCategory.slug}`}>
                                                     <FiEdit2 className={"text-blue-600 w-4 h-4"} />
                                                 </Link>
                                             </div>
@@ -74,6 +70,6 @@ const AdminCategories = ({loaderData}:Route.ComponentProps) => {
             </div>
         </div>
     );
-};
+}
 
-export default AdminCategories;
+export default AdminSubCategory
