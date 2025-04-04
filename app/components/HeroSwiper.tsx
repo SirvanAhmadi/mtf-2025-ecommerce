@@ -1,42 +1,43 @@
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/scrollbar';
-// import 'swiper/css/autoplay';
 
-
-// import required modules
+// Import required modules
 import { Scrollbar, Autoplay } from 'swiper/modules';
 
 const HeroSwiper = () => {
-    return (
-        <>
-          <Swiper
-            scrollbar={{
-              hide: true,
-            }}
-            autoplay={{
-                delay: 2500,
-                disableOnInteraction: true,
-            }}
-            loop={true}
-            modules={[Scrollbar,Autoplay]}
-          >
-            <SwiperSlide>
-                <img src="/slider-01.jpeg" alt="test-01" />
-            </SwiperSlide>
-            <SwiperSlide>
-                 <img src="/slider-02.jpeg" alt="test-01" />
-            </SwiperSlide>
-            <SwiperSlide>
-                <img src="/slider-03.jpeg" alt="test-01" />
-            </SwiperSlide>
-          </Swiper>
-        </>
-      );
-}
+    //Swiper settings
+    const swiperSettings = {
+        scrollbar: {
+            hide: true,
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: true,
+        },
+        loop: true,
+        modules: [Scrollbar, Autoplay],
+    };
 
-export default HeroSwiper
+    // برای بهینه سازی
+    const imageSources = [
+        '/slider-01.jpeg',
+        '/slider-02.jpeg',
+        '/slider-03.jpeg',
+    ];
+
+    return (
+        <Swiper {...swiperSettings}>
+            {imageSources.map((src, index) => (
+                <SwiperSlide key={index}>
+                    <img src={src} alt={`slider-${index + 1}`} />
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    );
+};
+
+export default HeroSwiper;
